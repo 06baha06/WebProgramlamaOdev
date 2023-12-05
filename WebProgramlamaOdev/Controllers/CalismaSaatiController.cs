@@ -39,7 +39,7 @@ namespace WebProgramlamaOdev.Controllers
             return View(calismaSaati);
         }
 
-        // GET: CalismaSaati/Create
+        // GET: CalismaSaati/Creat
         public IActionResult Create()
         {
             ViewData["DoktorID"] = new SelectList(_context.Doktorlar, "DoktorID", "DoktorAdi");
@@ -53,14 +53,12 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SaatID,Saatler,DoktorID")] CalismaSaati calismaSaati)
         {
-            if (ModelState.IsValid)
-            {
+            
                 _context.Add(calismaSaati);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["DoktorID"] = new SelectList(_context.Doktorlar, "DoktorID", "DoktorAdi", calismaSaati.DoktorID);
-            return View(calismaSaati);
+            
+           
         }
 
         // GET: CalismaSaati/Edit/5
@@ -92,28 +90,14 @@ namespace WebProgramlamaOdev.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
+           
                     _context.Update(calismaSaati);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CalismaSaatiExists(calismaSaati.SaatID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                
+               
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["DoktorID"] = new SelectList(_context.Doktorlar, "DoktorID", "DoktorAdi", calismaSaati.DoktorID);
-            return View(calismaSaati);
+            
+            
         }
 
         // GET: CalismaSaati/Delete/5

@@ -11,7 +11,7 @@ namespace WebProgramlamaOdev.Models
 		public int SaatID { get; set; }
 		[Required]
 		[MaxLength(100)]
-		[Display(Name = "Calisma Saatleri")]
+		[Display(Name = "Calışma Saatleri")]
 		public string Saatler { get; set; }
 		public int DoktorID { get; set; }
 		public Doktor Doktor { get; set; }

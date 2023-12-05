@@ -39,7 +39,7 @@ namespace WebProgramlamaOdev.Controllers
             return View(bolum);
         }
 
-        // GET: Bolum/Create
+        // GET: Bolum/Creat
         public IActionResult Create()
         {
             return View();
@@ -48,17 +48,27 @@ namespace WebProgramlamaOdev.Controllers
         // POST: Bolum/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("BolumID,BolumAdi")] Bolum bolum)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(bolum);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(bolum);
+        //}
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BolumID,BolumAdi")] Bolum bolum)
+        public IActionResult Create (Bolum y)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(bolum);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(bolum);
+           
+                _context.Add(y);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            
         }
 
         // GET: Bolum/Edit/5
@@ -89,27 +99,13 @@ namespace WebProgramlamaOdev.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
+            
                     _context.Update(bolum);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!BolumExists(bolum.BolumID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                
+               
                 return RedirectToAction(nameof(Index));
-            }
-            return View(bolum);
+            
         }
 
         // GET: Bolum/Delete/5

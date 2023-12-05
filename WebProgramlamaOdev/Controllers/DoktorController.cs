@@ -39,7 +39,7 @@ namespace WebProgramlamaOdev.Controllers
             return View(doktor);
         }
 
-        // GET: Doktor/Create
+        // GET: Doktor/Creat
         public IActionResult Create()
         {
             ViewData["BolumID"] = new SelectList(_context.Bolumler, "BolumID", "BolumAdi");
@@ -53,14 +53,10 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DoktorID,DoktorAdi,DoktorSoyadi,BolumID")] Doktor doktor)
         {
-            if (ModelState.IsValid)
-            {
+            
                 _context.Add(doktor);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["BolumID"] = new SelectList(_context.Bolumler, "BolumID", "BolumAdi", doktor.BolumID);
-            return View(doktor);
+                return RedirectToAction(nameof(Index)); 
         }
 
         // GET: Doktor/Edit/5
@@ -92,28 +88,14 @@ namespace WebProgramlamaOdev.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
+           
                     _context.Update(doktor);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!DoktorExists(doktor.DoktorID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                
+                
+                
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["BolumID"] = new SelectList(_context.Bolumler, "BolumID", "BolumAdi", doktor.BolumID);
-            return View(doktor);
+            
         }
 
         // GET: Doktor/Delete/5
