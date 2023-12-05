@@ -10,6 +10,7 @@ namespace WebProgramlamaOdev.Models
 	{
 		public DbSet<Bolum>Bolumler { get; set; }
 		public DbSet<Doktor> Doktorlar { get; set; }
+		public DbSet<CalismaSaati> Saatler { get; set; }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{

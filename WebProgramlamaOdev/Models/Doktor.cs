@@ -19,6 +19,7 @@ namespace WebProgramlamaOdev.Models
 		public string DoktorSoyadi { get; set; }
 		public int BolumID { get; set; }
 		public  Bolum Bolum { get; set;}
+		public ICollection<CalismaSaati> Saatler { get; set; }
 
 	}
 }

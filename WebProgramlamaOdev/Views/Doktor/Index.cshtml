@@ -1,0 +1,47 @@
+﻿@model IEnumerable<WebProgramlamaOdev.Models.Doktor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Doktorlar</h1>
+
+<p>
+    <a asp-action="Create">Yeni Oluştur</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DoktorAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DoktorSoyadi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bolum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoktorAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DoktorSoyadi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bolum.BolumAdi)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DoktorID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DoktorID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DoktorID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

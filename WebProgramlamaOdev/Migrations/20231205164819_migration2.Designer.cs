@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebProgramlamaOdev.Models;
 
@@ -10,9 +11,10 @@ using WebProgramlamaOdev.Models;
 namespace WebProgramlamaOdev.Migrations
 {
     [DbContext(typeof(BolumlerContext))]
-    partial class BolumlerContextModelSnapshot : ModelSnapshot
+    [Migration("20231205164819_migration2")]
+    partial class migration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
