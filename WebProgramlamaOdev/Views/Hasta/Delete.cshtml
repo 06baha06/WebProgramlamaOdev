@@ -1,7 +1,5 @@
 ﻿@model WebProgramlamaOdev.Models.Hasta
-@{
-    Layout = "_LayoutAna";
-}
+
 @{
     ViewData["Title"] = "Delete";
 }
@@ -13,6 +11,12 @@
     <h4>Hasta</h4>
     <hr />
     <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HastaAdSoyad)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HastaAdSoyad)
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.HastaTC)
         </dt>

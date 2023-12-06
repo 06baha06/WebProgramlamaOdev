@@ -6,6 +6,10 @@ namespace WebProgramlamaOdev.Models
     {
         public int HastaID { get; set; }
         [Required]
+        [MaxLength(100)]
+        [Display(Name = "HastaAdSoyad")]
+        public string HastaAdSoyad { get; set; }
+        [Required]
         [Display(Name = "HastaTC")]
         public int HastaTC { get; set; }
         [Required]

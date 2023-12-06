@@ -14,6 +14,11 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="HastaID" />
             <div class="form-group">
+                <label asp-for="HastaAdSoyad" class="control-label"></label>
+                <input asp-for="HastaAdSoyad" class="form-control" />
+                <span asp-validation-for="HastaAdSoyad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="HastaTC" class="control-label"></label>
                 <input asp-for="HastaTC" class="form-control" />
                 <span asp-validation-for="HastaTC" class="text-danger"></span>

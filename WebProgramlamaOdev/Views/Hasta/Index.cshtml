@@ -1,7 +1,5 @@
 ﻿@model IEnumerable<WebProgramlamaOdev.Models.Hasta>
-@{
-    Layout = "_LayoutAna";
-}
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -15,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.HastaAdSoyad)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.HastaTC)
             </th>
             <th>
@@ -26,6 +27,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.HastaAdSoyad)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HastaTC)
             </td>

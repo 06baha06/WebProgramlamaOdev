@@ -50,7 +50,7 @@ namespace WebProgramlamaOdev.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("HastaID,HastaTC,HastaPass")] Hasta hasta)
+        public async Task<IActionResult> Create([Bind("HastaID,HastaAdSoyad,HastaTC,HastaPass")] Hasta hasta)
         {
            
                 _context.Add(hasta);

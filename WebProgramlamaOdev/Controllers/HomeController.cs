@@ -53,16 +53,17 @@ namespace WebProgramlamaOdev.Controllers
             //    return View("Logged");
             //}
             //return View();
-            //foreach (var item in hasta)
-            //{
-            //    if (item.HastaTC == hasta.HastaTC && item.HastaPass == HttpContext.Request.Form["HastaPass"])
-            //    {
-            //        HttpContext.Session.SetInt32("Sessionuser", item.HastaTC);
+            foreach (var item in _context.Hastalar)
+            {
+                
+                if (item.HastaTC == hasta.HastaTC && item.HastaPass == hasta.HastaPass)
+                {
+                    
 
-            //        return View("Logged");
-            //    }
+                    return View("Logged");
+                }
 
-            //}
+            }
 
             return View();
         }

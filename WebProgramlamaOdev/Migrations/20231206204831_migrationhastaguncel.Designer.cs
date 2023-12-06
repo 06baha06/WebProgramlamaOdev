@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebProgramlamaOdev.Models;
 
@@ -10,9 +11,10 @@ using WebProgramlamaOdev.Models;
 namespace WebProgramlamaOdev.Migrations
 {
     [DbContext(typeof(BolumlerContext))]
-    partial class BolumlerContextModelSnapshot : ModelSnapshot
+    [Migration("20231206204831_migrationhastaguncel")]
+    partial class migrationhastaguncel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,8 +102,7 @@ namespace WebProgramlamaOdev.Migrations
 
                     b.Property<string>("HastaAdSoyad")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("HastaPass")
                         .HasColumnType("int");
