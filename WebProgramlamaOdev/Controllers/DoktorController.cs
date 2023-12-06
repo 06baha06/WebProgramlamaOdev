@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,10 +16,16 @@ namespace WebProgramlamaOdev.Controllers
 
 		// GET: Doktor
 		public async Task<IActionResult> Index()
-        {
-            var bolumlerContext = _context.Doktorlar.Include(d => d.Bolum);
-            return View(await bolumlerContext.ToListAsync());
+        {    if(HttpContext.Session.GetString("Sessionuser") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
+                var bolumlerContext = _context.Doktorlar.Include(d => d.Bolum);
+                return View(await bolumlerContext.ToListAsync());
+            
         }
+   
 
         // GET: Doktor/Details/5
         public async Task<IActionResult> Details(int? id)

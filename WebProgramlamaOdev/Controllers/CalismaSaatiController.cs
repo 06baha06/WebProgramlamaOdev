@@ -16,6 +16,10 @@ namespace WebProgramlamaOdev.Controllers
 		// GET: CalismaSaati
 		public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("Sessionuser") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var bolumlerContext = _context.Saatler.Include(c => c.Doktor);
             return View(await bolumlerContext.ToListAsync());
         }

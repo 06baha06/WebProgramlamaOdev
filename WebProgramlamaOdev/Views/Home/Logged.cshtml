@@ -1,5 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http
+@{
     Layout = "_Layout";
 }
 
-<h2>Giriş yapıldı</h2>
+<h2>Hoş geldiniz @Context.Session.GetString("Sessionuser")</h2>

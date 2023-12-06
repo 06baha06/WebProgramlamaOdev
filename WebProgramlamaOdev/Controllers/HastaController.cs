@@ -16,7 +16,11 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Hasta
         public async Task<IActionResult> Index()
         {
-              return _context.Hastalar != null ? 
+            if (HttpContext.Session.GetString("Sessionuser") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return _context.Hastalar != null ? 
                           View(await _context.Hastalar.ToListAsync()) :
                           Problem("Entity set 'BolumlerContext.Hastalar'  is null.");
         }
