@@ -13,5 +13,6 @@ namespace WebProgramlamaOdev.Models
 		[Display(Name = "Bolum Adı")]
 		public string BolumAdi { get; set; }
 		public ICollection<Doktor> Doktorlar { get; set; }
-	}
+        public ICollection<Randevu> Randevular { get; set; }
+    }
 }

@@ -15,5 +15,6 @@ namespace WebProgramlamaOdev.Models
         [Required]
         [Display(Name = "Hasta Sifre")]
         public int HastaPass { get; set; }
+        public ICollection<Randevu>? Randevular { get; set; }
     }
 }

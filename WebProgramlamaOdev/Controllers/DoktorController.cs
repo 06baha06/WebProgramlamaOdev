@@ -16,10 +16,11 @@ namespace WebProgramlamaOdev.Controllers
 
 		// GET: Doktor
 		public async Task<IActionResult> Index()
-        {    if(HttpContext.Session.GetString("Sessionuser") is null)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+        {
+        //if(HttpContext.Session.GetString("Sessionuser") is null)
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
             
                 var bolumlerContext = _context.Doktorlar.Include(d => d.Bolum);
                 return View(await bolumlerContext.ToListAsync());

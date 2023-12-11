@@ -1,0 +1,42 @@
+﻿@model WebProgramlamaOdev.Models.Randevu
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Randevu</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Hasta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Hasta.HastaAdSoyad)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Bolum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Bolum.BolumAdi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Doktor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Doktor.DoktorAdi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Saat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Saat.Saatler)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.RandevuID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

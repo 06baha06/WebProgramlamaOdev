@@ -58,9 +58,12 @@ namespace WebProgramlamaOdev.Controllers
                 
                 if (item.HastaTC == hasta.HastaTC && item.HastaPass == hasta.HastaPass)
                 {
-                    
+                    HttpContext.Session.SetString("Sessionuser", item.HastaAdSoyad);
+                    HttpContext.Session.SetInt32("Sessionuserid", item.HastaID);
+                     var username = HttpContext.Session.GetString("Sessionuser");
+                    var userid = HttpContext.Session.GetInt32("Sessionuserid");
 
-                    return View("Logged");
+                    return RedirectToAction("Create","Randevu");
                 }
 
             }

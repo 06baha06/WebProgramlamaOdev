@@ -15,5 +15,6 @@ namespace WebProgramlamaOdev.Models
 		public string Saatler { get; set; }
 		public int DoktorID { get; set; }
 		public Doktor Doktor { get; set; }
-	}
+        public ICollection<Randevu> Randevular { get; set; }
+    }
 }

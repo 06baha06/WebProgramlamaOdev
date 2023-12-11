@@ -20,6 +20,7 @@ namespace WebProgramlamaOdev.Models
 		public int BolumID { get; set; }
 		public  Bolum Bolum { get; set;}
 		public ICollection<CalismaSaati> Saatler { get; set; } //saatler
+        public ICollection<Randevu> Randevular { get; set; }
 
-	}
+    }
 }

@@ -1,0 +1,95 @@
+﻿@model WebProgramlamaOdev.Models.Randevu
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Randevu Oluştur</h2>
+
+<h4>Hoş geldin @Context.Session.GetString("Sessionuser")</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="display: none;">
+                <label asp-for="HastaID" class="control-label">Hasta Adı</label>
+                <input type="text" id="HastaID" name="HastaID" class="form-control" value="@Context.Session.GetInt32("Sessionuserid")" readonly>
+            </div>
+            <div class="form-group">
+                <label asp-for="BolumID" class="control-label">Bolum Adı</label>
+                <select asp-for="BolumID" class="form-control"  asp-items="ViewBag.BolumID"><option value="">Bir bölüm seçin</option></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoktorID" class="control-label">Doktor Adı</label>
+                <select asp-for="DoktorID" class="form-control" disabled> </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaatID" class="control-label">Randevu Saati</label>
+                <select asp-for="SaatID" class="form-control" disabled></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            // Bölüm seçildiğinde çağrılacak JavaScript fonksiyonu
+            $("#BolumID").change(function () {
+                var selectedBolumId = $(this).val();
+                var doktorSelect = $("#DoktorID");
+
+                if (selectedBolumId) {
+                    // Seçilen bölümü kullanarak doktorları getir
+                    $.getJSON("/Randevu/GetDoktorlar", { bolumId: selectedBolumId }, function (data) {
+                        doktorSelect.empty();
+                        doktorSelect.append($("<option value=''>Bir doktor seçin</option>"));
+                        $.each(data, function (index, item) {
+                             doktorSelect.append($("<option value='" + item.value + "'>" + item.text + "</option>"));
+                            console.log("item", item);
+                            //doktorSelect.append($(`<option>${item.Text}</option>`));
+                        });
+                        doktorSelect.prop("disabled", false);
+                    });
+                } else {
+                    // Eğer bölüm seçimi boşsa doktor seçim kutusunu sıfırla ve devre dışı bırak
+                    doktorSelect.empty().prop("disabled", true);
+                }
+            });
+            // Doktor seçilince
+            $("#DoktorID").change(function () {
+                var selectedDoktorId = $(this).val();
+                var saatSelect = $("#SaatID");
+
+                if (selectedDoktorId) {
+                    // Seçilen bölümü kullanarak doktorları getir
+                    $.getJSON("/Randevu/GetSaat", { doktorId: selectedDoktorId }, function (data) {
+                        saatSelect.empty();
+                        saatSelect.append($("<option value=''>Bir doktor seçin</option>"));
+                        $.each(data, function (index, item) {
+                            saatSelect.append($("<option value='" + item.value + "'>" + item.text + "</option>"));
+                            console.log("item", item);
+                            //doktorSelect.append($(`<option>${item.Text}</option>`));
+                        });
+                        saatSelect.prop("disabled", false);
+                    });
+                } else {
+                    // Eğer bölüm seçimi boşsa doktor seçim kutusunu sıfırla ve devre dışı bırak
+                    saatSelect.empty().prop("disabled", true);
+                }
+            });
+        });
+    </script>
+
+  
+}
+
