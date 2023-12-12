@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<WebProgramlamaOdev.Models.Randevu>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "RandevuControl";
+}
+@{
+    Layout = "_LayoutAna";
 }
 
-<h1>Index</h1>
+<h1>RandevuControl</h1>
 
 
 <table class="table">
@@ -26,24 +29,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var appointments in Model)
+        {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Hasta.HastaAdSoyad)
+                    @Html.DisplayFor(modelItem => appointments.Hasta.HastaAdSoyad)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Bolum.BolumAdi)
+                    @Html.DisplayFor(modelItem => appointments.Bolum.BolumAdi)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Doktor.DoktorAdi)
+                    @Html.DisplayFor(modelItem => appointments.Doktor.DoktorAdi)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Saat.Saatler)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RandevuID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RandevuID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RandevuID">Delete</a>
+                    @Html.DisplayFor(modelItem => appointments.Saat.Saatler)
             </td>
         </tr>
 }

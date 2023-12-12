@@ -45,14 +45,6 @@ namespace WebProgramlamaOdev.Controllers
         }
         public IActionResult HastaGiris(Hasta hasta)
         {
-            //var hasta = _context.Hastalar.FirstOrDefault(h => h.HastaTC == HttpContext.Request.Form["HastaTC"] && h.HastaPass == HttpContext.Request.Form["HastaPass"]);
-            //if (_context.Hastalar.HastaTc != null)
-            //{
-            //    // Veritabanında hasta bulundu, belirli bir işlemi gerçekleştir.
-            //    // Örneğin, hasta bilgilerini kullanarak bir sayfa göster.
-            //    return View("Logged");
-            //}
-            //return View();
             foreach (var item in _context.Hastalar)
             {
                 
@@ -60,9 +52,8 @@ namespace WebProgramlamaOdev.Controllers
                 {
                     HttpContext.Session.SetString("Sessionuser", item.HastaAdSoyad);
                     HttpContext.Session.SetInt32("Sessionuserid", item.HastaID);
-                     var username = HttpContext.Session.GetString("Sessionuser");
-                    var userid = HttpContext.Session.GetInt32("Sessionuserid");
 
+                    
                     return RedirectToAction("Create","Randevu");
                 }
 
@@ -70,6 +61,22 @@ namespace WebProgramlamaOdev.Controllers
 
             return View();
         }
+
+		public IActionResult RandevuControl()
+		{
+			var userId = HttpContext.Session.GetInt32("Sessionuserid");
+
+			// Kullanıcının kendi randevularını çek
+			var appointments = _context.Randevular
+                .Include(r => r.Bolum)
+                .Include(r => r.Doktor)
+                .Include(r => r.Hasta)
+                .Include(r => r.Saat)
+                .Where(a => a.HastaID == userId)
+				.ToList();
+
+			return View(appointments);
+		}
 
         
 

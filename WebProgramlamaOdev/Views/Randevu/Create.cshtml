@@ -1,13 +1,63 @@
 ﻿@model WebProgramlamaOdev.Models.Randevu
-
+@{
+    Layout = "_LayoutAna";
+}
 @{
     ViewData["Title"] = "Create";
 }
+<style>
+    .col-md-4
+    {
+        width: 200px;
+        max-width: 100%;
+    }
+    .row{
+        /* border-radius: 5px;
+        background-color: rgba(13, 202, 240, 0.52);*/
+        display: flex;
+        margin-left: 150px;
+        align-content: center;
+        justify-content: center;
+        width: 400px;
+    }
+    h4 {
+        /* background-color: rgba(13, 202, 240, 0.52); /* Rengi ve saydamlığı buradan ayarlayabilirsin 
+          border-radius: 5px; */ /* İsteğe bağlı: Köşeleri yuvarlama */
+        padding: 10px;
+        margin-right: 145px;
+        margin-left: 150px;
+        max-width: 400px; /* veya istediğin genişlik */
+        width: 100%;
+    }
+
+    .pb-3 {
+        height: 73vh;
+    }
+    .btn-primary {
+        color: #fff;
+        background-color: #1c0df0b3; /* Bu kısım butonun arka plan rengini belirler */
+        border-color: #1c0df0b3; /* Bu kısım butonun kenarlık rengini belirler */
+    }
+    .center-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-image: url('/resimler/arkaplan.jpg'); /* Resim yolunu doğru şekilde güncelleyin */
+        background-size: cover; /* Resmi kaplamak için */
+        background-position: center;
+    }
+
+    .form-container {
+        max-width: 400px; /* veya istediğin genişlik */
+        width: 100%;
+    }
+</style>
 
 <h2>Randevu Oluştur</h2>
-
-<h4>Hoş geldin @Context.Session.GetString("Sessionuser")</h4>
 <hr />
+<h4>Hoş geldin @Context.Session.GetString("Sessionuser")</h4>
+
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -29,15 +79,12 @@
                 <select asp-for="SaatID" class="form-control" disabled></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

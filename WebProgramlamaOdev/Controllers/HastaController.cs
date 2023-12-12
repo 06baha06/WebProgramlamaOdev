@@ -16,7 +16,7 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Hasta
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("Sessionuser") is null)
+            if (HttpContext.Session.GetString("Sessionuser") !="abc")
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -59,9 +59,9 @@ namespace WebProgramlamaOdev.Controllers
            
                 _context.Add(hasta);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            
-            
+                
+
+            return RedirectToAction("Home", "Index");
         }
 
         // GET: Hasta/Edit/5

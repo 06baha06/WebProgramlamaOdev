@@ -16,7 +16,11 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Bolum
         public async Task<IActionResult> Index()
         {
-              return _context.Bolumler != null ? 
+            if (HttpContext.Session.GetString("Sessionuser") != "abc")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return _context.Bolumler != null ? 
                           View(await _context.Bolumler.ToListAsync()) :
                           Problem("Entity set 'BolumlerContext.Bolumler'  is null.");
         }

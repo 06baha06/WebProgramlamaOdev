@@ -16,7 +16,7 @@ namespace WebProgramlamaOdev.Controllers
 		// GET: CalismaSaati
 		public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("Sessionuser") is null)
+            if (HttpContext.Session.GetString("Sessionuser") != "abc")
             {
                 return RedirectToAction("Index", "Home");
             }

@@ -1,4 +1,71 @@
-﻿<!DOCTYPE html>
+﻿<style>
+    body {
+        background-image: url('/resimler/arkaplan.jpg');
+        background-size: cover;
+        background-position: center;
+        /* İsterseniz ekstra stiller ekleyebilirsiniz */
+    }
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #f8f9fa; /* İsterseniz arka plan rengini ayarlayabilirsiniz */
+        padding: 10px 0; /* İsteğe bağlı: footer içeriğine boşluk ekler */
+        .col-md-4
+
+    {
+        width: 200px;
+        max-width: 100%;
+    }
+
+    .row {
+        /* border-radius: 5px;
+            background-color: rgba(13, 202, 240, 0.52);*/
+        display: flex;
+        margin-left: 150px;
+        align-content: center;
+        justify-content: center;
+        width: 400px;
+    }
+
+    h4 {
+        /* background-color: rgba(13, 202, 240, 0.52); /* Rengi ve saydamlığı buradan ayarlayabilirsin
+              border-radius: 5px; */ /* İsteğe bağlı: Köşeleri yuvarlama */
+        padding: 10px;
+        margin-right: 145px;
+        margin-left: 150px;
+        max-width: 400px; /* veya istediğin genişlik */
+        width: 100%;
+    }
+
+    .pb-3 {
+        height: 73vh;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #1c0df0b3; /* Bu kısım butonun arka plan rengini belirler */
+        border-color: #1c0df0b3; /* Bu kısım butonun kenarlık rengini belirler */
+    }
+
+    .center-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-image: url('/resimler/arkaplan.jpg'); /* Resim yolunu doğru şekilde güncelleyin */
+        background-size: cover; /* Resmi kaplamak için */
+        background-position: center;
+    }
+
+    .form-container {
+        max-width: 400px; /* veya istediğin genişlik */
+        width: 100%;
+    }
+    }
+</style>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -26,8 +93,18 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="HastaGiris">Randevu Al</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="RandevuControl">Randevu kontrol</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Giris">Admin Girişi</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark">@Context.Session.GetString("Sessionuser")</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cikis">Çıkış</a>
+                        </li>
+                        
                     </ul>
                 </div>
             </div>

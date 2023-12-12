@@ -37,6 +37,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Randevu
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("Sessionuser") != "abc")
+            {
+                return RedirectToAction("Index", "Home");
+            }
             var bolumlerContext = _context.Randevular.Include(r => r.Bolum).Include(r => r.Doktor).Include(r => r.Hasta).Include(r => r.Saat);
             return View(await bolumlerContext.ToListAsync());
         }
@@ -80,11 +84,18 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RandevuID,HastaID,BolumID,DoktorID,SaatID")] Randevu randevu)
         {
-            var username = HttpContext.Session.GetString("Sessionuser");
+            if (HttpContext.Session.GetString("Sessionuser") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+			if (HttpContext.Session.GetString("Sessionuser") != null)
+			{
+				return View();
+			}
 
-            _context.Add(randevu);
+			_context.Add(randevu);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             
             
         }
