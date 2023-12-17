@@ -61,7 +61,7 @@ namespace WebProgramlamaOdev.Controllers
                 await _context.SaveChangesAsync();
                 
 
-            return RedirectToAction("Home", "Index");
+            return RedirectToAction("HastaGiris", "Home");
         }
 
         // GET: Hasta/Edit/5

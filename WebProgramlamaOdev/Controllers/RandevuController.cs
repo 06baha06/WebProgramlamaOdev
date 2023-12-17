@@ -28,7 +28,7 @@ namespace WebProgramlamaOdev.Controllers
         public JsonResult GetSaat(int doktorId)
         {
             var saatList = _context.Saatler
-                .Where(d => d.SaatID == doktorId)
+                .Where(d => d.DoktorID == doktorId)
                 .Select(d => new { Value = d.SaatID, Text = d.Saatler })
                 .ToList();
 
@@ -70,6 +70,11 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Randevu/Create
         public IActionResult Create()
         {
+            string mySessionValue = HttpContext.Session.GetString("Sessionuser");
+            if (mySessionValue is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewData["BolumID"] = new SelectList(_context.Bolumler, "BolumID", "BolumAdi");
             ViewData["DoktorID"] = new SelectList(_context.Doktorlar, "DoktorID", "DoktorAdi");
             ViewData["HastaID"] = new SelectList(_context.Hastalar, "HastaID", "HastaAdSoyad");
@@ -84,18 +89,29 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("RandevuID,HastaID,BolumID,DoktorID,SaatID")] Randevu randevu)
         {
-            if (HttpContext.Session.GetString("Sessionuser") is null)
+            string mySessionValue = HttpContext.Session.GetString("Sessionuser");
+            if (mySessionValue is null)
             {
                 return RedirectToAction("Index", "Home");
             }
-			if (HttpContext.Session.GetString("Sessionuser") != null)
-			{
-				return View();
-			}
+            if (HttpContext.Session.GetString("Sessionuser") != null)
+            {
+                var existingRandevu = _context.Randevular
+                    .FirstOrDefault(r => r.SaatID == randevu.SaatID);
 
-			_context.Add(randevu);
+                if (existingRandevu != null)
+                {
+                    // Eğer aynı saat için başka bir randevu varsa, hata mesajını TempData ile taşı
+                    TempData["ErrorMsg"] = "Bu doktorun bu tarih ve saatine başka bir randevu zaten alınmış.";
+                    return RedirectToAction("Create", "Randevu");
+                }
+            }
+
+
+
+            _context.Add(randevu);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("RandevuControl", "Home");
             
             
         }

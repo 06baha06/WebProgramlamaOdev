@@ -87,22 +87,40 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@_localization.Getkey("layAnaSayfa")</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="HastaGiris">Randevu Al</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="HastaGiris">@_localization.Getkey("layRandevu")</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="RandevuControl">Randevu kontrol</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="RandevuControl">@_localization.Getkey("layRanGor")</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Giris">Admin Girişi</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Giris">@_localization.Getkey("layAdmin")</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark">@Context.Session.GetString("Sessionuser")</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cikis">Çıkış</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Cikis">@_localization.Getkey("layCikis")</a>
+                        </li>
+                        <li>
+                           <div class="dropdown">
+                               <button type="button"class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">Localization</button>
+                               <ul class="dropdown-menu">
+                                   <li>
+                                       <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="tr-TR"
+                                       class="dropdown-item">
+                                       <i class="flag-icon flag-icon-gb"></i>Türkçe</a> 
+                                   </li>
+                                    <li>
+                                        <a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US"
+                                           class="dropdown-item">
+                                            <i class="flag-icon flag-icon-gb"></i>İngilizce
+                                        </a>
+                                    </li>
+                               </ul>
+                           </div>
                         </li>
                         
                     </ul>

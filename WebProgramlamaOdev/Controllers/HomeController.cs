@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -6,13 +7,19 @@ using SQLitePCL;
 using System.Diagnostics;
 using System.Runtime.Intrinsics.Arm;
 using WebProgramlamaOdev.Models;
+using WebProgramlamaOdev.Services;
 
 namespace WebProgramlamaOdev.Controllers
 {
 	public class HomeController : Controller
 	{
 		private BolumlerContext _context = new BolumlerContext();
-		
+		private LanguageService _localization;
+		public HomeController(LanguageService localization)
+		{
+			_localization = localization;
+		}
+
 		static List<Admin> admins = new List<Admin>()
 		{
 			new Admin() {AdminEmail="abc",AdminPass="sau"},
@@ -20,9 +27,19 @@ namespace WebProgramlamaOdev.Controllers
 
 		public IActionResult Index()
 		{
+			ViewBag.Welcome = _localization.Getkey("welcome").Value;
+			var currentCulture = Thread.CurrentThread.CurrentCulture.Name;
 			return View();
 		}
-
+		public IActionResult ChangeLanguage(string culture)
+		{
+			Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName,
+				CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)), new CookieOptions()
+				{
+					Expires = DateTimeOffset.UtcNow.AddYears(1)
+				});
+			return Redirect(Request.Headers["Referer"].ToString());
+		}
 		public IActionResult Giris(Admin adm)
 		{
 			foreach (var item in admins) 
