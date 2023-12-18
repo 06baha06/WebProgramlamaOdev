@@ -2,7 +2,8 @@
 {
     public class Admin
     {
-        public string AdminEmail { get; set; }
+		public int AdminID { get; set; }
+		public string AdminEmail { get; set; }
         public string AdminPass { get; set; }
     }
 }

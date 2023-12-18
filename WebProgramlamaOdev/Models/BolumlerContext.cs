@@ -13,6 +13,7 @@ namespace WebProgramlamaOdev.Models
 		public DbSet<CalismaSaati>? Saatler { get; set; }
         public DbSet<Hasta>? Hastalar { get; set; }
         public DbSet<Randevu>? Randevular { get; set; }
+		public DbSet<Admin>? Adminler { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{

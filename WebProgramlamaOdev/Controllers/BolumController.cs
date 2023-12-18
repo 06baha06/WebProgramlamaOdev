@@ -16,7 +16,7 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Bolum
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("Sessionuser") != "abc")
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -28,6 +28,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Bolum/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Bolumler == null)
             {
                 return NotFound();
@@ -46,6 +50,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Bolum/Creat
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
@@ -68,8 +76,11 @@ namespace WebProgramlamaOdev.Controllers
         [HttpPost]
         public IActionResult Create (Bolum y)
         {
-           
-                _context.Add(y);
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            _context.Add(y);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             
@@ -78,6 +89,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Bolum/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Bolumler == null)
             {
                 return NotFound();
@@ -98,6 +113,10 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("BolumID,BolumAdi")] Bolum bolum)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id != bolum.BolumID)
             {
                 return NotFound();
@@ -115,6 +134,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Bolum/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Bolumler == null)
             {
                 return NotFound();
@@ -135,6 +158,10 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (_context.Bolumler == null)
             {
                 return Problem("Entity set 'BolumlerContext.Bolumler'  is null.");

@@ -16,7 +16,7 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Hasta
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("Sessionuser") !="abc")
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -67,6 +67,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Hasta/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Hastalar == null)
             {
                 return NotFound();
@@ -87,6 +91,10 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("HastaID,HastaTC,HastaPass")] Hasta hasta)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id != hasta.HastaID)
             {
                 return NotFound();
@@ -104,6 +112,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Hasta/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Hastalar == null)
             {
                 return NotFound();
@@ -124,6 +136,10 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (_context.Hastalar == null)
             {
                 return Problem("Entity set 'BolumlerContext.Hastalar'  is null.");

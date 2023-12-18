@@ -37,7 +37,7 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Randevu
         public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("Sessionuser") != "abc")
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
             {
                 return RedirectToAction("Index", "Home");
             }

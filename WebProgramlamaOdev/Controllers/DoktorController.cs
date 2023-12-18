@@ -17,7 +17,7 @@ namespace WebProgramlamaOdev.Controllers
 		// GET: Doktor
 		public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("Sessionuser") != "abc")
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -31,6 +31,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Doktor/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Doktorlar == null)
             {
                 return NotFound();
@@ -50,6 +54,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Doktor/Creat
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewData["BolumID"] = new SelectList(_context.Bolumler, "BolumID", "BolumAdi");
             return View();
         }
@@ -61,8 +69,12 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DoktorID,DoktorAdi,DoktorSoyadi,BolumID")] Doktor doktor)
         {
-            
-                _context.Add(doktor);
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            _context.Add(doktor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index)); 
         }
@@ -70,6 +82,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: Doktor/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Doktorlar == null)
             {
                 return NotFound();

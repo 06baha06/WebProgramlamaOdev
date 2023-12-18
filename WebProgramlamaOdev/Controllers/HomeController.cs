@@ -20,10 +20,10 @@ namespace WebProgramlamaOdev.Controllers
 			_localization = localization;
 		}
 
-		static List<Admin> admins = new List<Admin>()
-		{
-			new Admin() {AdminEmail="abc",AdminPass="sau"},
-		};
+		//static List<Admin> admins = new List<Admin>()
+		//{
+		//	new Admin() {AdminEmail="abc",AdminPass="sau"},
+		//};
 
 		public IActionResult Index()
 		{
@@ -42,11 +42,11 @@ namespace WebProgramlamaOdev.Controllers
 		}
 		public IActionResult Giris(Admin adm)
 		{
-			foreach (var item in admins) 
+			foreach (var item in _context.Adminler) 
 			{
 				if(item.AdminEmail == adm.AdminEmail && item.AdminPass == adm.AdminPass)
 				{
-                    HttpContext.Session.SetString("Sessionuser",item.AdminEmail);
+                    HttpContext.Session.SetString("Sessionuseradm",item.AdminEmail);
 
                     return View("Logged");
                 }

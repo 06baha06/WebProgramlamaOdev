@@ -16,7 +16,7 @@ namespace WebProgramlamaOdev.Controllers
 		// GET: CalismaSaati
 		public async Task<IActionResult> Index()
         {
-            if (HttpContext.Session.GetString("Sessionuser") != "abc")
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -27,6 +27,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: CalismaSaati/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Saatler == null)
             {
                 return NotFound();
@@ -46,6 +50,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: CalismaSaati/Creat
         public IActionResult Create()
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             ViewData["DoktorID"] = new SelectList(_context.Doktorlar, "DoktorID", "DoktorAdi");
             return View();
         }
@@ -57,8 +65,12 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("SaatID,Saatler,DoktorID")] CalismaSaati calismaSaati)
         {
-            
-                _context.Add(calismaSaati);
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            _context.Add(calismaSaati);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             
@@ -68,6 +80,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: CalismaSaati/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Saatler == null)
             {
                 return NotFound();
@@ -89,6 +105,10 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("SaatID,Saatler,DoktorID")] CalismaSaati calismaSaati)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id != calismaSaati.SaatID)
             {
                 return NotFound();
@@ -107,6 +127,10 @@ namespace WebProgramlamaOdev.Controllers
         // GET: CalismaSaati/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (id == null || _context.Saatler == null)
             {
                 return NotFound();
@@ -128,6 +152,10 @@ namespace WebProgramlamaOdev.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (HttpContext.Session.GetString("Sessionuseradm") is null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
             if (_context.Saatler == null)
             {
                 return Problem("Entity set 'BolumlerContext.Saatler'  is null.");
